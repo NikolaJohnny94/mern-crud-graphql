@@ -14,7 +14,7 @@
 
 ## Description 📜
 
-MERN stack CRUD app with GraphQL, Material UI and Sass 🤗
+MERN stack CRUD app with GraphQL, Material UI and Sass (Still in progress) 🤗
 
 ## Requirements ⚙️
 
