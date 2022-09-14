@@ -1,0 +1,36 @@
+@import 'variables/variables.scss';
+
+.table-row {
+  td {
+    a {
+      font-weight: bold;
+      color: $primary-color;
+    }
+  }
+
+  &:last-child {
+    td,
+    th {
+      border: none;
+    }
+  }
+
+  .table-row-icons {
+    cursor: pointer;
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+
+  .table-row-edit-icon {
+    &:hover {
+      color: #060494;
+    }
+  }
+
+  .table-row-delete-icon {
+    &:hover {
+      color: #a30316;
+    }
+  }
+}

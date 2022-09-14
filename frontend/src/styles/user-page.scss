@@ -1,0 +1,24 @@
+.user-page-container {
+  display: flex;
+  height: 600px;
+  justify-content: center;
+  align-items: center;
+
+  .user-page-card {
+    width: 345px;
+    border: 2px solid grey;
+
+    .user-page-card-content {
+      p {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+
+        span {
+          font-size: 20px;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}

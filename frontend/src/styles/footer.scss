@@ -1,0 +1,33 @@
+@import 'variables/variables';
+
+.footer-container {
+  background-color: $primary-color !important;
+  height: 56px;
+
+  .footer-navigation-action {
+    color: #fff;
+    font-weight: 400;
+
+    .footer-icon {
+      margin-bottom: 5px;
+
+      &:active {
+        transform: scale(0.9);
+      }
+    }
+
+    .footer-github-icon {
+      color: #000;
+    }
+
+    .footer-linkedin-icon {
+      color: #0029b1;
+    }
+
+    &.footer-text {
+      span {
+        font-size: 16px;
+      }
+    }
+  }
+}

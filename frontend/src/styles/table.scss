@@ -1,0 +1,28 @@
+@import 'variables/variables';
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: calc(100vh - 56px);
+  margin: 0 100px;
+  padding: 30px 0;
+
+  .add-user-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+
+    .add-user-button {
+      width: 135px;
+
+      .add-user-icon {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .users-table {
+    min-width: 650px;
+  }
+}
