@@ -1,11 +1,14 @@
+@import 'sass-utils/variables.scss';
+
 .user-page-container {
   display: flex;
   height: 600px;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 
   .user-page-card {
-    width: 345px;
+    width: 390px;
     border: 2px solid grey;
 
     .user-page-card-content {
@@ -19,6 +22,18 @@
           margin-left: 10px;
         }
       }
+    }
+  }
+
+  .go-back-home-button-container {
+    display: flex;
+    margin-top: 40px;
+    width: 100%;
+    .go-back-home-button {
+      margin-left: 3%;
+      font-size: 48px;
+      cursor: pointer;
+      color: $primary-color;
     }
   }
 }

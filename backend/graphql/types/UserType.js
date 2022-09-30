@@ -1,5 +1,5 @@
-import User from '../../models/User'
 import { GraphQLObjectType, GraphQLID, GraphQLString } from 'graphql'
+import { GraphQLDateTime } from 'graphql-iso-date'
 
 const UserType = new GraphQLObjectType({
   name: 'User',
@@ -11,6 +11,8 @@ const UserType = new GraphQLObjectType({
     occupation: { type: GraphQLString },
     phoneNumber: { type: GraphQLString },
     slug: { type: GraphQLString },
+    createdAt: { type: GraphQLDateTime },
+    updatedAt: { type: GraphQLDateTime },
   }),
 })
 

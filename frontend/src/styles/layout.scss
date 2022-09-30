@@ -1,7 +1,9 @@
+@import 'sass-utils/variables.scss';
+
 .children-component-container {
   min-height: calc(100vh - 56px);
   &.dark-mode {
-    background-color: #000;
-    color: #fff;
+    background-color: $dark-mode;
+    color: $light-mode;
   }
 }

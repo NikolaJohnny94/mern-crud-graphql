@@ -1,7 +1,16 @@
-@import 'variables/variables.scss';
+@import 'sass-utils/variables.scss';
 
 .navbar-container {
   flex-grow: 1;
+
+  .MuiTypography-root {
+    display: flex;
+    align-items: center;
+
+    .navbarTitle {
+      margin-left: 10px;
+    }
+  }
 
   .navbar-logo {
     flex-grow: 1;

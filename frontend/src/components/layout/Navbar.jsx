@@ -21,6 +21,9 @@ const Navbar = () => {
             <Link to='/'>
               <img src='https://i.imgur.com/fZ2zTHA.gif' />
             </Link>
+            <span className='navbarTitle'>
+              MERN + GraphQL + MUI CRUD WEB APP
+            </span>
           </Typography>
           <Button color='inherit' onClick={() => dispatch({ type: DARK_MODE })}>
             <Tooltip title={darkMode ? 'Light Mode' : 'Dark Mode'} arrow>

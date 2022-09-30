@@ -1,10 +1,12 @@
+@import 'sass-utils/variables.scss';
+
 .delete-user-dialog {
   &.dark-mode {
     .MuiPaper-root {
-      background-color: #000;
-      color: #fff;
+      background-color: $dark-mode;
+      color: $light-mode;
       p {
-        color: #fff;
+        color: $light-mode;
       }
     }
   }
