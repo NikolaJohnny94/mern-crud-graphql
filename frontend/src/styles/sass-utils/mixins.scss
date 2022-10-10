@@ -4,7 +4,7 @@
     color: #fff;
   }
 
-  /*Navbar(pass)*/
+  /*Navbar*/
   .navbar-container {
     .MuiToolbar-root {
       background-color: $secondary-color;
@@ -83,6 +83,13 @@
   border: 2px solid $light-mode;
   background-color: $dark-mode;
 
+  .modal-close-icon {
+    &:hover {
+      background-color: $secondary-color;
+      color: $light-mode;
+    }
+  }
+
   .modal-inputs {
     background-color: $dark-mode;
 
@@ -94,11 +101,13 @@
 
     input {
       color: $light-mode !important;
-      border: 2px solid rgba(22, 21, 21, 0.87);
+      border: 1px solid rgba(31, 30, 30, 0.87);
       border-radius: 5px;
+    }
 
-      &:hover {
-        border: 2px solid $light-mode;
+    &:hover {
+      fieldset {
+        border-color: $light-mode;
       }
     }
 

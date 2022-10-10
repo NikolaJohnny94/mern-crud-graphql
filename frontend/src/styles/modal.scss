@@ -23,11 +23,12 @@
 
     .modal-close-icon {
       align-self: flex-end;
-      cursor: pointer;
       padding: 3px;
+      cursor: pointer;
 
       &:hover {
-        background-color: lightgray;
+        background-color: $primary-color;
+        color: $light-mode;
         border-radius: 50%;
       }
     }

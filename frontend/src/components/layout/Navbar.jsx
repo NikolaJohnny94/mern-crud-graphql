@@ -21,7 +21,7 @@ const Navbar = () => {
             <Link to='/'>
               <img src='https://i.imgur.com/fZ2zTHA.gif' />
             </Link>
-            <span className='navbarTitle'>
+            <span className='navbar-title'>
               MERN + GraphQL + MUI CRUD WEB APP
             </span>
           </Typography>

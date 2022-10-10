@@ -14,7 +14,7 @@ import Stack from '@mui/material/Stack'
 import LinearProgress from '@mui/material/LinearProgress'
 import Box from '@mui/material/Box'
 import Tooltip from '@mui/material/Tooltip'
-import moment from 'moment'
+import dateFormatter from '../helpers/dateFormatter'
 import '../styles/user-page.scss'
 
 const User = () => {
@@ -77,11 +77,7 @@ const User = () => {
             >
               <CalendarMonthIcon />{' '}
               <Tooltip title='Created At' placement='right' arrow>
-                <span>
-                  {moment(data.userBySlug.createdAt).format(
-                    'MMMM Do YYYY, h:mm:ss a'
-                  )}
-                </span>
+                <span>{dateFormatter(data.userBySlug.createdAt)}</span>
               </Tooltip>
             </Typography>
             {data.userBySlug.createdAt !== data.userBySlug.updatedAt && (
@@ -92,11 +88,7 @@ const User = () => {
               >
                 <ModeEditIcon />{' '}
                 <Tooltip title='Updated At' placement='right' arrow>
-                  <span>
-                    {moment(data.userBySlug.updatedAt).format(
-                      'MMMM Do YYYY, h:mm:ss a'
-                    )}
-                  </span>
+                  <span>{dateFormatter(data.userBySlug.updatedAt)}</span>
                 </Tooltip>
               </Typography>
             )}

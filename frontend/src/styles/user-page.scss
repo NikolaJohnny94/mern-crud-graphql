@@ -10,6 +10,8 @@
   .user-page-card {
     width: 390px;
     border: 2px solid grey;
+    margin-top: 10%;
+    cursor: pointer;
 
     .user-page-card-content {
       p {
@@ -27,7 +29,7 @@
 
   .go-back-home-button-container {
     display: flex;
-    margin-top: 40px;
+    margin-top: 60px;
     width: 100%;
     .go-back-home-button {
       margin-left: 3%;
