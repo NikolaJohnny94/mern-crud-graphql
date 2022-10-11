@@ -38,7 +38,11 @@ const User = () => {
         <Card className='user-page-card'>
           <CardContent className='user-page-card-content'>
             <Typography gutterBottom variant='h4' component='div'>
-              {data.userBySlug.firstName} {data.userBySlug.lastName}
+              <Tooltip title='Full Name' placement='right' arrow>
+                <span>
+                  {data.userBySlug.firstName} {data.userBySlug.lastName}
+                </span>
+              </Tooltip>
             </Typography>
             <Typography
               variant='body2'
