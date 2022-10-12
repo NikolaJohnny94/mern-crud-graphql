@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { GET_USER } from '../queries/UserQueries'
 import Card from '@mui/material/Card'
@@ -7,12 +7,20 @@ import Typography from '@mui/material/Typography'
 import EmailIcon from '@mui/icons-material/Email'
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone'
 import WorkIcon from '@mui/icons-material/Work'
+import ModeEditIcon from '@mui/icons-material/ModeEdit'
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft'
 import Stack from '@mui/material/Stack'
 import LinearProgress from '@mui/material/LinearProgress'
+import Box from '@mui/material/Box'
+import Tooltip from '@mui/material/Tooltip'
+import dateFormatter from '../helpers/dateFormatter'
 import '../styles/user-page.scss'
 
 const User = () => {
   const params = useParams()
+  const navigate = useNavigate()
+
   const { data, loading, error } = useQuery(GET_USER, {
     variables: { slug: params.slug },
   })
@@ -30,7 +38,11 @@ const User = () => {
         <Card className='user-page-card'>
           <CardContent className='user-page-card-content'>
             <Typography gutterBottom variant='h4' component='div'>
-              {data.userBySlug.firstName} {data.userBySlug.lastName}
+              <Tooltip title='Full Name' placement='right' arrow>
+                <span>
+                  {data.userBySlug.firstName} {data.userBySlug.lastName}
+                </span>
+              </Tooltip>
             </Typography>
             <Typography
               variant='body2'
@@ -38,24 +50,62 @@ const User = () => {
               className='user-page-card-info'
             >
               <WorkIcon />
-              <span> {data.userBySlug.occupation}</span>
+              <Tooltip title='Occupation' placement='right' arrow>
+                <span> {data.userBySlug.occupation}</span>
+              </Tooltip>
             </Typography>
             <Typography
               variant='body2'
               color='text.secondary'
               className='user-page-card-info'
             >
-              <EmailIcon /> <span>{data.userBySlug.email}</span>
+              <EmailIcon />
+              <Tooltip title='Email' placement='right' arrow>
+                <span>{data.userBySlug.email}</span>
+              </Tooltip>
             </Typography>
             <Typography
               variant='body2'
               color='text.secondary'
               className='user-page-card-info'
             >
-              <LocalPhoneIcon /> <span>{data.userBySlug.phoneNumber}</span>
+              <LocalPhoneIcon />
+              <Tooltip title='Phone Number' placement='right' arrow>
+                <span>{data.userBySlug.phoneNumber}</span>
+              </Tooltip>
             </Typography>
+            <Typography
+              variant='body2'
+              color='text.secondary'
+              className='user-page-card-info'
+            >
+              <CalendarMonthIcon />{' '}
+              <Tooltip title='Created At' placement='right' arrow>
+                <span>{dateFormatter(data.userBySlug.createdAt)}</span>
+              </Tooltip>
+            </Typography>
+            {data.userBySlug.createdAt !== data.userBySlug.updatedAt && (
+              <Typography
+                variant='body2'
+                color='text.secondary'
+                className='user-page-card-info'
+              >
+                <ModeEditIcon />{' '}
+                <Tooltip title='Updated At' placement='right' arrow>
+                  <span>{dateFormatter(data.userBySlug.updatedAt)}</span>
+                </Tooltip>
+              </Typography>
+            )}
           </CardContent>
         </Card>
+        <Box className='go-back-home-button-container '>
+          <Tooltip title='Go Back' placement='right' arrow>
+            <ArrowCircleLeftIcon
+              className='go-back-home-button'
+              onClick={() => navigate('/')}
+            />
+          </Tooltip>
+        </Box>
       </div>
     </>
   )

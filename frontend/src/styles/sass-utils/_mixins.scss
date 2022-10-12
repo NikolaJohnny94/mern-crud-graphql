@@ -1,0 +1,130 @@
+@mixin dark-mode {
+  .children-component-container {
+    background-color: $dark-mode;
+    color: #fff;
+  }
+
+  /*Navbar*/
+  .navbar-container {
+    .MuiToolbar-root {
+      background-color: $secondary-color;
+    }
+  }
+
+  /*Table*/
+  .table-container {
+    .MuiPaper-root {
+      background-color: $dark-mode;
+    }
+
+    td {
+      a {
+        font-weight: bold;
+        color: $secondary-color;
+      }
+    }
+
+    th,
+    td,
+    .table-pagination,
+    .MuiBox-root {
+      color: #fff;
+      background-color: $dark-mode;
+    }
+
+    tr {
+      border-bottom: 1px solid #fff;
+    }
+
+    .add-user-button {
+      background-color: $secondary-color;
+    }
+
+    .MuiTablePagination-actions button {
+      color: #fff;
+    }
+
+    .MuiInputBase-root svg {
+      color: #fff !important;
+    }
+
+    .MuiTableContainer-root {
+      border-radius: 0 !important;
+    }
+  }
+
+  /*User Page*/
+  .user-page-container {
+    .user-page-card {
+      background-color: $dark-mode;
+    }
+
+    div {
+      color: #fff;
+    }
+
+    p {
+      color: grey;
+    }
+
+    .go-back-home-button {
+      color: $secondary-color;
+    }
+  }
+
+  /*Footer*/
+  .footer-container {
+    background-color: $secondary-color !important;
+  }
+}
+
+@mixin modal-dark-mode {
+  color: $light-mode;
+  border: 2px solid $light-mode;
+  background-color: $dark-mode;
+
+  .modal-close-icon {
+    &:hover {
+      background-color: $secondary-color;
+      color: $light-mode;
+    }
+  }
+
+  .modal-inputs {
+    background-color: $dark-mode;
+
+    label.Mui-focused {
+      color: $secondary-color !important;
+      font-weight: bold;
+      border-color: 'green';
+    }
+
+    input {
+      color: $light-mode !important;
+      border: 1px solid rgba(31, 30, 30, 0.87);
+      border-radius: 5px;
+    }
+
+    &:hover {
+      fieldset {
+        border-color: $light-mode;
+      }
+    }
+
+    label {
+      color: $light-mode;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      -webkit-text-fill-color: $light-mode !important;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+  }
+
+  .modal-submit-button {
+    background-color: $secondary-color;
+  }
+}

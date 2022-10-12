@@ -1,6 +1,7 @@
 import express from 'express'
 import { config } from 'dotenv'
 import cors from 'cors'
+import colors from 'colors'
 import dbConnect from './db/dbConnect'
 import { graphqlHTTP } from 'express-graphql'
 import schema from './graphql/schemas/schema'
@@ -22,6 +23,7 @@ app.use(
 
 app.listen(process.env.PORT, () => {
   console.log(
-    `Server is running on http://localhost:${process.env.PORT}/graphql`
+    `\nServer is running on ${process.env.PROTOCOL}://${process.env.HOST}:${process.env.PORT}/${process.env.ENDPOINT}`
+      .inverse.yellow
   )
 })

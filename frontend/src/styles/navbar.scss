@@ -1,7 +1,17 @@
-@import 'variables/variables.scss';
+@import 'sass-utils/variables';
 
 .navbar-container {
   flex-grow: 1;
+
+  .MuiTypography-root {
+    display: flex;
+    align-items: center;
+
+    .navbar-title {
+      font-family: 'Roboto Mono', monospace;
+      margin-left: 10px;
+    }
+  }
 
   .navbar-logo {
     flex-grow: 1;

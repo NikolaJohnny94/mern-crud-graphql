@@ -1,4 +1,4 @@
-@import 'variables/variables.scss';
+@import 'sass-utils/variables';
 
 .table-row {
   td {
@@ -24,7 +24,7 @@
 
   .table-row-edit-icon {
     &:hover {
-      color: #060494;
+      color: $primary-color;
     }
   }
 

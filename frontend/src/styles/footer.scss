@@ -1,14 +1,15 @@
-@import 'variables/variables';
+@import 'sass-utils/variables';
 
 .footer-container {
   background-color: $primary-color !important;
   height: 56px;
 
   .footer-navigation-action {
-    color: #fff;
+    color: $light-mode;
     font-weight: 400;
 
     .footer-icon {
+      font-size: 20px;
       margin-bottom: 5px;
 
       &:active {
@@ -26,6 +27,7 @@
 
     &.footer-text {
       span {
+        font-family: 'Roboto Mono', monospace;
         font-size: 16px;
       }
     }
