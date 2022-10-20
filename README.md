@@ -16,6 +16,20 @@
 
 MERN stack CRUD app with GraphQL, Material UI and Sass (Still in progress) 🤗
 
+## Populate DB 🌾
+
+✔️ To populate DB with data from ./backend/files/**<ins>Users.csv</ins>** file, navigate to **<ins>backend</ins>** folder and run:
+
+```
+npm run populate-db
+```
+
+❌ To remove existing data from the DB run:
+
+```
+npm run clear-db
+```
+
 ## Requirements ⚙️
 
 Install node modules: <br>
@@ -30,13 +44,17 @@ In the ./backend/.env file, add your Mongo URI
 
 ## Run the dev server 👨‍💻
 
-### Back-End
+### Back-End 🌐
+
+Navigate to **backend** folder and run:
 
 ```
 npm run dev
 ```
 
-### Front-End
+### Front-End 🖼️
+
+Navigate to **frontend** folder and run:
 
 ```
 npm start
