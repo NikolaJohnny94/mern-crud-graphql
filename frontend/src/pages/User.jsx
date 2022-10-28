@@ -15,6 +15,7 @@ import LinearProgress from '@mui/material/LinearProgress'
 import Box from '@mui/material/Box'
 import Tooltip from '@mui/material/Tooltip'
 import dateFormatter from '../helpers/dateFormatter'
+import ErrorMessage from '../components/ErrorMessage'
 import '../styles/user-page.scss'
 
 const User = () => {
@@ -32,6 +33,11 @@ const User = () => {
       </Stack>
     )
   }
+
+  if (error) {
+    return <ErrorMessage type='loading-error' />
+  }
+
   return (
     <>
       <div className='user-page-container'>

@@ -1,20 +1,18 @@
 @mixin dark-mode {
   .children-component-container {
-    background-color: $dark-mode;
-    color: #fff;
+    background-color: $dark-color;
+    color: $light-color;
   }
 
-  /*Navbar*/
   .navbar-container {
     .MuiToolbar-root {
       background-color: $secondary-color;
     }
   }
 
-  /*Table*/
   .table-container {
     .MuiPaper-root {
-      background-color: $dark-mode;
+      background-color: $dark-color;
     }
 
     td {
@@ -28,12 +26,12 @@
     td,
     .table-pagination,
     .MuiBox-root {
-      color: #fff;
-      background-color: $dark-mode;
+      color: $light-color;
+      background-color: $dark-color;
     }
 
     tr {
-      border-bottom: 1px solid #fff;
+      border-bottom: 1px solid $light-color;
     }
 
     .add-user-button {
@@ -41,11 +39,11 @@
     }
 
     .MuiTablePagination-actions button {
-      color: #fff;
+      color: $light-color;
     }
 
     .MuiInputBase-root svg {
-      color: #fff !important;
+      color: $light-color !important;
     }
 
     .MuiTableContainer-root {
@@ -53,14 +51,13 @@
     }
   }
 
-  /*User Page*/
   .user-page-container {
     .user-page-card {
-      background-color: $dark-mode;
+      background-color: $dark-color;
     }
 
     div {
-      color: #fff;
+      color: $light-color;
     }
 
     p {
@@ -72,26 +69,25 @@
     }
   }
 
-  /*Footer*/
   .footer-container {
     background-color: $secondary-color !important;
   }
 }
 
 @mixin modal-dark-mode {
-  color: $light-mode;
-  border: 2px solid $light-mode;
-  background-color: $dark-mode;
+  color: $light-color;
+  border: 2px solid $light-color;
+  background-color: $dark-color;
 
   .modal-close-icon {
     &:hover {
       background-color: $secondary-color;
-      color: $light-mode;
+      color: $light-color;
     }
   }
 
   .modal-inputs {
-    background-color: $dark-mode;
+    background-color: $dark-color;
 
     label.Mui-focused {
       color: $secondary-color !important;
@@ -100,31 +96,58 @@
     }
 
     input {
-      color: $light-mode !important;
+      color: $light-color !important;
       border: 1px solid rgba(31, 30, 30, 0.87);
       border-radius: 5px;
     }
 
     &:hover {
       fieldset {
-        border-color: $light-mode;
+        border-color: $light-color;
       }
     }
 
     label {
-      color: $light-mode;
+      color: $light-color;
     }
 
     input:-webkit-autofill,
     input:-webkit-autofill:hover,
     input:-webkit-autofill:focus,
     input:-webkit-autofill:active {
-      -webkit-text-fill-color: $light-mode !important;
+      -webkit-text-fill-color: $light-color !important;
       transition: background-color 5000s ease-in-out 0s;
     }
   }
 
   .modal-submit-button {
     background-color: $secondary-color;
+  }
+}
+
+@mixin error-message($error-type) {
+  display: flex;
+  justify-content: center;
+
+  h1 {
+    font-family: $navbar-footer-error-font;
+  }
+
+  @if ($error-type == 'loading-error') {
+    padding-top: 4rem;
+
+    .loading-error-icon {
+      font-size: 36px;
+      vertical-align: top;
+    }
+  } @else if ($error-type == 'not-found') {
+    align-items: center;
+    padding-top: 15%;
+    color: $red-color;
+
+    .not-found-page-icon {
+      font-size: 38px;
+      vertical-align: top;
+    }
   }
 }
