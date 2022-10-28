@@ -3,7 +3,7 @@
 .children-component-container {
   min-height: calc(100vh - 56px);
   &.dark-mode {
-    background-color: $dark-mode;
-    color: $light-mode;
+    background-color: $dark-color;
+    color: $light-color;
   }
 }

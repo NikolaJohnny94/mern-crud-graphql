@@ -7,18 +7,15 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 400px;
-  background-color: $light-mode;
-  border: 2px solid $dark-mode;
+  background-color: $light-color;
+  border: 2px solid $dark-color;
   box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%),
     0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
   padding: 32px;
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
 
   .modal-icon-and-title-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    @include flex-column;
     width: 100%;
 
     .modal-close-icon {
@@ -28,7 +25,7 @@
 
       &:hover {
         background-color: $primary-color;
-        color: $light-mode;
+        color: $light-color;
         border-radius: 50%;
       }
     }
@@ -52,5 +49,9 @@
 
   &.dark-mode {
     @include modal-dark-mode;
+  }
+
+  @media (max-width: 480px) {
+    width: 75%;
   }
 }
