@@ -15,6 +15,7 @@ import Button from '@mui/material/Button'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import FormModal from './Modal'
 import DataTableRow from './TableRow'
+import ErrorMessage from './ErrorMessage'
 import Stack from '@mui/material/Stack'
 import LinearProgress from '@mui/material/LinearProgress'
 import TablePagination from '@mui/material/TablePagination'
@@ -55,7 +56,7 @@ const DataTable = () => {
   }
 
   if (error) {
-    return <h1>Error Occured</h1>
+    return <ErrorMessage type='loading-error' />
   }
 
   return (

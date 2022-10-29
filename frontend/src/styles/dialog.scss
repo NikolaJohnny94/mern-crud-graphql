@@ -3,10 +3,10 @@
 .delete-user-dialog {
   &.dark-mode {
     .MuiPaper-root {
-      background-color: $dark-mode;
-      color: $light-mode;
+      background-color: $dark-color;
+      color: $light-color;
       p {
-        color: $light-mode;
+        color: $light-color;
       }
     }
   }

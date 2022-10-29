@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify'
 import Layout from './components/layout'
 import Home from './pages/Home'
 import User from './pages/User'
+import ErrorMessage from './components/ErrorMessage'
 import 'react-toastify/dist/ReactToastify.css'
 import './styles/dark-mode.scss'
 
@@ -25,6 +26,7 @@ const App = () => {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/user/:slug' element={<User />} />
+            <Route path='/*' element={<ErrorMessage type='not-found' />} />
           </Routes>
           <ToastContainer
             position='top-center'

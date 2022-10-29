@@ -1,0 +1,10 @@
+@import 'sass-utils/variables';
+@import 'sass-utils/mixins';
+
+.loading-error-container {
+  @include error-message('loading-error');
+}
+
+.not-found-page {
+  @include error-message('not-found');
+}

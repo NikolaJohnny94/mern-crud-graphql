@@ -6,6 +6,7 @@ import { CLOSE_MODAL, CLOSE_EDIT_FORM } from '../context/types'
 import { ADD_USER, UPDATE_USER } from '../mutations/userMutations'
 import { GET_USERS } from '../queries/UserQueries'
 import emptyFieldsCheck from '../helpers/emptyFieldsCheck'
+import validateEmail from '../helpers/validateEmail'
 import { toast } from 'react-toastify'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
@@ -80,10 +81,6 @@ const FormModal = () => {
     },
   })
 
-  const emailValidation = (email) => {
-    return /\S+@\S+\.\S+/.test(email)
-  }
-
   const onChange = (e) => {
     setData((prev) => ({
       ...prev,
@@ -94,11 +91,13 @@ const FormModal = () => {
   const onSubmit = async () => {
     setErrorInput(true)
     if (!emptyFieldsCheck(data)) {
-      if (!emailValidation(email)) {
+      if (!validateEmail(email)) {
         toast.error('Please enter an valid email')
+        setEmailError(true)
         return
       }
       try {
+        setEmailError(false)
         await addUser(firstName, lastName, email, occupation, phoneNumber)
         modalDispatch({ type: CLOSE_MODAL })
         setData({
@@ -118,10 +117,12 @@ const FormModal = () => {
 
   const onUpdate = async () => {
     try {
-      if (!emailValidation(email)) {
+      if (!validateEmail(email)) {
         toast.error('Please enter an valid email')
+        setEmailError(true)
         return
       }
+      setEmailError(false)
       await updateUser()
       modalDispatch({ type: CLOSE_EDIT_FORM })
       setData({

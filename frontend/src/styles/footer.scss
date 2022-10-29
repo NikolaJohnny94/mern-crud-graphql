@@ -5,7 +5,7 @@
   height: 56px;
 
   .footer-navigation-action {
-    color: $light-mode;
+    color: $light-color;
     font-weight: 400;
 
     .footer-icon {
@@ -27,7 +27,7 @@
 
     &.footer-text {
       span {
-        font-family: 'Roboto Mono', monospace;
+        font-family: $navbar-footer-error-font;
         font-size: 16px;
       }
     }
