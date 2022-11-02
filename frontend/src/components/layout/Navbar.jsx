@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import { useDarkModeContext } from '../../context/dark-mode/darkModeContext'
-import { DARK_MODE } from '../../context/types'
 import PropTypes from 'prop-types'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
@@ -13,7 +12,7 @@ import Tooltip from '@mui/material/Tooltip'
 import '../../styles/navbar.scss'
 
 const Navbar = ({ title, img }) => {
-  const { darkMode, dispatch } = useDarkModeContext()
+  const { darkMode, darkModeToggle } = useDarkModeContext()
 
   return (
     <Box className='navbar-container'>
@@ -25,7 +24,7 @@ const Navbar = ({ title, img }) => {
             </Link>
             <span className='navbar-title'>{title}</span>
           </Typography>
-          <Button color='inherit' onClick={() => dispatch({ type: DARK_MODE })}>
+          <Button color='inherit' onClick={darkModeToggle}>
             <Tooltip title={darkMode ? 'Light Mode' : 'Dark Mode'} arrow>
               {darkMode ? <WbSunnyIcon /> : <DarkModeIcon />}
             </Tooltip>

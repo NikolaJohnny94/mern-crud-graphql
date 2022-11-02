@@ -1,5 +1,5 @@
 const initialState = {
-  darkMode: false,
+  darkMode: JSON.parse(localStorage.getItem('darkMode')),
 }
 
 export default initialState

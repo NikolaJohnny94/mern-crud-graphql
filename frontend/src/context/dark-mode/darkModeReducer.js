@@ -1,10 +1,14 @@
-import { DARK_MODE } from '../types'
+import { DARK_MODE_ON, DARK_MODE_OFF } from '../types'
 
-const darkModeReducer = (state, action) => {
+const DarkModeReducer = (state, action) => {
   switch (action.type) {
-    case DARK_MODE:
+    case DARK_MODE_ON:
       return {
-        darkMode: !state.darkMode,
+        darkMode: true,
+      }
+    case DARK_MODE_OFF:
+      return {
+        darkMode: false,
       }
     default: {
       return state
@@ -12,4 +16,4 @@ const darkModeReducer = (state, action) => {
   }
 }
 
-export default darkModeReducer
+export default DarkModeReducer

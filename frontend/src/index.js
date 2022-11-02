@@ -7,7 +7,7 @@ import { ApolloProvider } from '@apollo/client'
 import client from './apollo-client/ApolloClient'
 import { ModalContextProvider } from './context/modal/modelContext'
 import { DialogContextProvider } from './context/dialog/dialogContext'
-import { DarkModeProvider } from './context/dark-mode/darkModeContext'
+import DarkModeProvider from './context/dark-mode/darkModeProvider'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
