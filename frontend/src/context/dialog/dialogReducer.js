@@ -1,20 +1,20 @@
 import { OPEN_DIALOG, CLOSE_DIALOG } from '../types'
 
-const dialogReducer = (state, action) => {
+const DialogReducer = (state, action) => {
   switch (action.type) {
     case OPEN_DIALOG:
       return {
         open: true,
-        userID: action.payload,
+        userId: action.payload,
       }
     case CLOSE_DIALOG:
       return {
         open: false,
-        userID: null,
+        userId: null,
       }
     default:
       return state
   }
 }
 
-export default dialogReducer
+export default DialogReducer

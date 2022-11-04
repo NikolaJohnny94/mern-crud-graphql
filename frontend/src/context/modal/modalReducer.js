@@ -5,7 +5,7 @@ import {
   CLOSE_EDIT_FORM,
 } from '../types'
 
-const modalReducer = (state, action) => {
+const ModalReducer = (state, action) => {
   switch (action.type) {
     case OPEN_MODAL:
       return {
@@ -35,4 +35,4 @@ const modalReducer = (state, action) => {
   }
 }
 
-export default modalReducer
+export default ModalReducer

@@ -1,5 +1,6 @@
-export const initialState = {
+const initialState = {
   open: false,
-  confirmDelete: false,
-  userID: null,
+  userId: null,
 }
+
+export default initialState

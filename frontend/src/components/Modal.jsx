@@ -1,13 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/client'
-import { useModalContext } from '../context/modal/modelContext'
-import { useDarkModeContext } from '../context/dark-mode/darkModeContext'
-import { CLOSE_MODAL, CLOSE_EDIT_FORM } from '../context/types'
+import { useModalContext } from '../context/modal/ModalContext'
+import { useDarkModeContext } from '../context/dark-mode/DarkModeContext'
 import { ADD_USER, UPDATE_USER } from '../mutations/userMutations'
 import { GET_USERS } from '../queries/UserQueries'
-import emptyFieldsCheck from '../helpers/emptyFieldsCheck'
-import validateEmail from '../helpers/validateEmail'
-import { toast } from 'react-toastify'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -21,9 +17,11 @@ const FormModal = () => {
 
   const {
     open,
-    dispatch: modalDispatch,
     editForm,
     editUser,
+    addNewUser,
+    updateExistingUser,
+    closeModal,
   } = useModalContext()
 
   const [errorInput, setErrorInput] = useState(false)
@@ -88,78 +86,23 @@ const FormModal = () => {
     }))
   }
 
-  const onSubmit = async () => {
-    setErrorInput(true)
-    if (!emptyFieldsCheck(data)) {
-      if (!validateEmail(email)) {
-        toast.error('Please enter an valid email')
-        setEmailError(true)
-        return
-      }
-      try {
-        setEmailError(false)
-        await addUser(firstName, lastName, email, occupation, phoneNumber)
-        modalDispatch({ type: CLOSE_MODAL })
-        setData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          occupation: '',
-          phoneNumber: '',
-        })
-        setErrorInput(false)
-        toast.success('New user added!')
-      } catch (e) {
-        toast.error(e.message)
-      }
-    }
+  const onSubmit = () => {
+    addNewUser(data, setErrorInput, setEmailError, addUser, setData)
   }
 
-  const onUpdate = async () => {
-    try {
-      if (!validateEmail(email)) {
-        toast.error('Please enter an valid email')
-        setEmailError(true)
-        return
-      }
-      setEmailError(false)
-      await updateUser()
-      modalDispatch({ type: CLOSE_EDIT_FORM })
-      setData({
-        firstName: '',
-        lastName: '',
-        email: '',
-        occupation: '',
-        phoneNumber: '',
-      })
-      toast.info('User Updated!')
-    } catch (e) {
-      toast.error(e.message)
-    }
+  const onUpdate = () => {
+    updateExistingUser(email, setEmailError, updateUser, setData)
   }
 
   const onClose = () => {
-    if (editForm) {
-      modalDispatch({ type: CLOSE_EDIT_FORM })
-    } else {
-      modalDispatch({ type: CLOSE_MODAL })
-    }
-    setErrorInput(false)
-    setData({
-      id: '',
-      firstName: '',
-      lastName: '',
-      email: '',
-      occupation: '',
-      phoneNumber: '',
-    })
+    closeModal(editForm, setErrorInput, setData)
   }
 
   return (
     <>
       <Modal
         open={open}
-        onClose={() => modalDispatch({ type: CLOSE_MODAL })}
+        onClose={onClose}
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'
       >
