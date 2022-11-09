@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useDarkModeContext } from '../../context/dark-mode/darkModeContext'
+import { useDarkModeContext } from '../../context/dark-mode/DarkModeContext'
 import PropTypes from 'prop-types'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'

@@ -1,7 +1,7 @@
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { useModalContext } from '../context/modal/modelContext'
-import { useDialogContext } from '../context/dialog/dialogContext'
-import { OPEN_EDIT_FORM, OPEN_DIALOG } from '../context/types'
+import { useModalContext } from '../context/modal/ModalContext'
+import { useDialogContext } from '../context/dialog/DialogContext'
 import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
 import EditIcon from '@mui/icons-material/Edit'
@@ -10,12 +10,8 @@ import Tooltip from '@mui/material/Tooltip'
 import '../styles/table-row.scss'
 
 const DataTableRow = ({ user, index }) => {
-  const { dispatch: dispatchDialogAction } = useDialogContext()
-  const { dispatch: dispatchModalAction } = useModalContext()
-
-  const confirmDeleteDialog = () => {
-    dispatchDialogAction({ type: OPEN_DIALOG, payload: user.id })
-  }
+  const { openDialog } = useDialogContext()
+  const { populateEditForm } = useModalContext()
 
   return (
     <>
@@ -40,19 +36,7 @@ const DataTableRow = ({ user, index }) => {
           <Tooltip title='Edit User' placement='top' arrow>
             <EditIcon
               className='table-row-icons  table-row-edit-icon'
-              onClick={() =>
-                dispatchModalAction({
-                  type: OPEN_EDIT_FORM,
-                  payload: {
-                    id: user.id,
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    email: user.email,
-                    occupation: user.occupation,
-                    phoneNumber: user.phoneNumber,
-                  },
-                })
-              }
+              onClick={() => populateEditForm(user)}
             />
           </Tooltip>
         </TableCell>
@@ -60,13 +44,26 @@ const DataTableRow = ({ user, index }) => {
           <Tooltip title='Delete User' placement='top' arrow>
             <DeleteIcon
               className='table-row-icons table-row-delete-icon'
-              onClick={confirmDeleteDialog}
+              onClick={() => openDialog(user)}
             />
           </Tooltip>
         </TableCell>
       </TableRow>
     </>
   )
+}
+
+DataTableRow.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    occupation: PropTypes.string.isRequired,
+    phoneNumber: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+  }),
+  index: PropTypes.number.isRequired,
 }
 
 export default DataTableRow

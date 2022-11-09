@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { useDarkModeContext } from './context/dark-mode/darkModeContext'
+import { useDarkModeContext } from './context/dark-mode/DarkModeContext'
 import { ToastContainer } from 'react-toastify'
 import Layout from './components/layout'
 import Home from './pages/Home'

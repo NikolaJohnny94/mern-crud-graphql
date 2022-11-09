@@ -1,11 +1,8 @@
-import { useContext } from 'react'
 import { useMutation } from '@apollo/client'
-import { DialogContext } from '../context/dialog/dialogContext'
-import { useDarkModeContext } from '../context/dark-mode/darkModeContext'
+import { useDialogContext } from '../context/dialog/DialogContext'
+import { useDarkModeContext } from '../context/dark-mode/DarkModeContext'
 import { GET_USERS } from '../queries/UserQueries'
 import { DELETE_USER } from '../mutations/userMutations'
-import { CLOSE_DIALOG } from '../context/types'
-import { toast } from 'react-toastify'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
@@ -16,10 +13,15 @@ import '../styles/dialog.scss'
 
 const DeleteUserDialog = () => {
   const { darkMode } = useDarkModeContext()
-  const { open, dispatch, userID } = useContext(DialogContext)
+  const { open, userId, removeUser, closeDialog } = useDialogContext()
+
+  const dialogText = {
+    title: 'Delete User ?',
+    content: 'Are you sure that you want to proceed with this action ?',
+  }
 
   const [deleteUser] = useMutation(DELETE_USER, {
-    variables: { id: userID },
+    variables: { id: userId },
     update(cache, { data: { deleteUser } }) {
       const { users } = cache.readQuery({
         query: GET_USERS,
@@ -33,41 +35,32 @@ const DeleteUserDialog = () => {
     },
   })
 
-  const removeUser = () => {
-    deleteUser()
-    dispatch({ type: CLOSE_DIALOG })
-    toast.error('User deleted!', {
-      theme: 'colored',
-    })
-  }
-
-  const onClose = () => {
-    dispatch({ type: CLOSE_DIALOG })
-  }
-
   return (
     <Dialog
       open={open}
-      onClose={onClose}
+      onClose={closeDialog}
       aria-labelledby='responsive-dialog-title'
       className={`delete-user-dialog ${darkMode && 'dark-mode'}`}
     >
-      <DialogTitle id='responsive-dialog-title'>{'Delete User ?'}</DialogTitle>
+      <DialogTitle id='responsive-dialog-title'>{dialogText.title}</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          Are you sure that you want to proceed with this action ?
-        </DialogContentText>
+        <DialogContentText>{dialogText.content}</DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button
-          onClick={removeUser}
+          onClick={() => removeUser(deleteUser)}
           autoFocus
           variant='contained'
           color='error'
         >
           Yes
         </Button>
-        <Button autoFocus onClick={onClose} variant='contained' color='info'>
+        <Button
+          autoFocus
+          onClick={closeDialog}
+          variant='contained'
+          color='info'
+        >
           No
         </Button>
       </DialogActions>

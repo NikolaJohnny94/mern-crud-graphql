@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { GET_USERS } from '../queries/UserQueries'
-import { OPEN_MODAL } from '../context/types'
-import { useModalContext } from '../context/modal/modelContext'
+import { useModalContext } from '../context/modal/ModalContext'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -23,10 +22,12 @@ import Tooltip from '@mui/material/Tooltip'
 import '../styles/table.scss'
 
 const DataTable = () => {
+  const { openModal } = useModalContext()
   const { data, loading, error } = useQuery(GET_USERS)
-  const { dispatch } = useModalContext()
+
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
+
   const tableCells = [
     'No: ',
     'First Name',
@@ -45,6 +46,19 @@ const DataTable = () => {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value)
     setPage(0)
+  }
+
+  const tableRowsPerPage = () => {
+    return data.users
+      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+      .map((user, index) => (
+        <DataTableRow
+          className='table-row'
+          key={user.id}
+          user={user}
+          index={page === 0 ? index : index + page * rowsPerPage}
+        />
+      ))
   }
 
   if (loading) {
@@ -69,7 +83,7 @@ const DataTable = () => {
               className='add-user-button'
               variant='contained'
               color='primary'
-              onClick={() => dispatch({ type: OPEN_MODAL })}
+              onClick={openModal}
             >
               Add User
               <PersonAddIcon className='add-user-icon' />
@@ -87,18 +101,7 @@ const DataTable = () => {
                 ))}
               </TableRow>
             </TableHead>
-            <TableBody>
-              {data.users
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((user, index) => (
-                  <DataTableRow
-                    className='table-row'
-                    key={user.id}
-                    user={user}
-                    index={page === 0 ? index : index + page * rowsPerPage}
-                  />
-                ))}
-            </TableBody>
+            <TableBody>{tableRowsPerPage()}</TableBody>
           </Table>
           <TablePagination
             className='table-pagination'

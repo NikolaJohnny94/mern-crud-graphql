@@ -5,20 +5,20 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { ApolloProvider } from '@apollo/client'
 import client from './apollo-client/ApolloClient'
-import { ModalContextProvider } from './context/modal/modelContext'
-import { DialogContextProvider } from './context/dialog/dialogContext'
-import DarkModeProvider from './context/dark-mode/darkModeProvider'
+import ModalProvider from './context/modal/ModalProvider'
+import DialogProvider from './context/dialog/DialogProvider'
+import DarkModeProvider from './context/dark-mode/DarkModeProvider'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <DarkModeProvider>
-        <ModalContextProvider>
-          <DialogContextProvider>
+        <ModalProvider>
+          <DialogProvider>
             <App />
-          </DialogContextProvider>
-        </ModalContextProvider>
+          </DialogProvider>
+        </ModalProvider>
       </DarkModeProvider>
     </ApolloProvider>
   </React.StrictMode>

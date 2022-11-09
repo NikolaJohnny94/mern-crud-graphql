@@ -21,6 +21,7 @@ export const ADD_USER = gql`
       email
       occupation
       phoneNumber
+      slug
     }
   }
 `

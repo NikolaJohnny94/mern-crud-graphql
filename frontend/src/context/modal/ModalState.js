@@ -1,5 +1,7 @@
-export const initialState = {
+const initialState = {
   open: false,
   editForm: false,
   editUser: {},
 }
+
+export default initialState
