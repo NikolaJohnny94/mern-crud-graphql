@@ -8,20 +8,23 @@ import { OPEN_DIALOG, CLOSE_DIALOG } from '../types'
 const DialogProvider = ({ children }) => {
   const [state, dispatch] = useReducer(DialogReducer, initialState)
 
+  // Open Dialog
+  const openDialog = (user) => {
+    dispatch({ type: OPEN_DIALOG, payload: user.id })
+  }
+
+  //CLose Dialog
+  const closeDialog = () => {
+    dispatch({ type: CLOSE_DIALOG })
+  }
+
+  //Remove User
   const removeUser = (deleteUser) => {
     deleteUser()
     dispatch({ type: CLOSE_DIALOG })
     toast.error('User deleted!', {
       theme: 'colored',
     })
-  }
-
-  const openDialog = (user) => {
-    dispatch({ type: OPEN_DIALOG, payload: user.id })
-  }
-
-  const closeDialog = () => {
-    dispatch({ type: CLOSE_DIALOG })
   }
 
   return (

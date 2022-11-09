@@ -24,6 +24,7 @@ import '../styles/table.scss'
 const DataTable = () => {
   const { openModal } = useModalContext()
   const { data, loading, error } = useQuery(GET_USERS)
+
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
 
@@ -45,6 +46,19 @@ const DataTable = () => {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value)
     setPage(0)
+  }
+
+  const tableRowsPerPage = () => {
+    return data.users
+      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+      .map((user, index) => (
+        <DataTableRow
+          className='table-row'
+          key={user.id}
+          user={user}
+          index={page === 0 ? index : index + page * rowsPerPage}
+        />
+      ))
   }
 
   if (loading) {
@@ -87,18 +101,7 @@ const DataTable = () => {
                 ))}
               </TableRow>
             </TableHead>
-            <TableBody>
-              {data.users
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((user, index) => (
-                  <DataTableRow
-                    className='table-row'
-                    key={user.id}
-                    user={user}
-                    index={page === 0 ? index : index + page * rowsPerPage}
-                  />
-                ))}
-            </TableBody>
+            <TableBody>{tableRowsPerPage()}</TableBody>
           </Table>
           <TablePagination
             className='table-pagination'

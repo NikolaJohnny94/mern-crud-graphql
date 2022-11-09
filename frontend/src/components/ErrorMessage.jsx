@@ -4,6 +4,17 @@ import PropTypes from 'prop-types'
 import '../styles/error.scss'
 
 const ErrorMessage = ({ type }) => {
+  const messages = [
+    {
+      text: 'Error Occured',
+      icon: <GppBadIcon color='error' className='loading-error-icon' />,
+    },
+    {
+      text: '404 | Not Found',
+      icon: <ReportIcon className='not-found-page-icon' />,
+    },
+  ]
+
   return (
     <div
       className={
@@ -15,13 +26,12 @@ const ErrorMessage = ({ type }) => {
       <h1>
         {type === 'loading-error' ? (
           <>
-            Error Occured{' '}
-            <GppBadIcon color='error' className='loading-error-icon' />
+            {messages[0].text} {messages[0].icon}
           </>
         ) : (
           type === 'not-found' && (
             <>
-              404 | Not Found <ReportIcon className='not-found-page-icon' />
+              {messages[1].text} {messages[1].icon}
             </>
           )
         )}

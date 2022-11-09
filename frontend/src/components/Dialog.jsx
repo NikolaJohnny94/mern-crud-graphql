@@ -15,6 +15,11 @@ const DeleteUserDialog = () => {
   const { darkMode } = useDarkModeContext()
   const { open, userId, removeUser, closeDialog } = useDialogContext()
 
+  const dialogText = {
+    title: 'Delete User ?',
+    content: 'Are you sure that you want to proceed with this action ?',
+  }
+
   const [deleteUser] = useMutation(DELETE_USER, {
     variables: { id: userId },
     update(cache, { data: { deleteUser } }) {
@@ -37,11 +42,9 @@ const DeleteUserDialog = () => {
       aria-labelledby='responsive-dialog-title'
       className={`delete-user-dialog ${darkMode && 'dark-mode'}`}
     >
-      <DialogTitle id='responsive-dialog-title'>{'Delete User ?'}</DialogTitle>
+      <DialogTitle id='responsive-dialog-title'>{dialogText.title}</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          Are you sure that you want to proceed with this action ?
-        </DialogContentText>
+        <DialogContentText>{dialogText.content}</DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button
