@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
+import useLocalStorage from '../hooks/useLocalStorage'
 import { useQuery } from '@apollo/client'
 import { GET_USERS } from '../queries/UserQueries'
 import { useModalContext } from '../context/modal/ModalContext'
@@ -25,8 +26,8 @@ const DataTable = () => {
   const { openModal } = useModalContext()
   const { data, loading, error } = useQuery(GET_USERS)
 
-  const [page, setPage] = useState(0)
-  const [rowsPerPage, setRowsPerPage] = useState(5)
+  const [currentPage, setCurrentPage] = useLocalStorage('currentPage', 0)
+  const [rowsPerPage, setRowsPerPage] = useLocalStorage('rowsPerPage', 5)
 
   const tableCells = [
     'No: ',
@@ -39,24 +40,32 @@ const DataTable = () => {
     'Delete',
   ]
 
+  useEffect(() => {
+    if (currentPage >= Math.ceil(data?.users.length / rowsPerPage)) {
+      if (currentPage > 0) {
+        setCurrentPage((previousState) => previousState - 1)
+      }
+    }
+  }, [data?.users.length])
+
   const handleChangePage = (event, newPage) => {
-    setPage(newPage)
+    setCurrentPage(newPage)
   }
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value)
-    setPage(0)
+    setCurrentPage(0)
   }
 
   const tableRowsPerPage = () => {
     return data.users
-      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+      .slice(currentPage * rowsPerPage, currentPage * rowsPerPage + rowsPerPage)
       .map((user, index) => (
         <DataTableRow
           className='table-row'
           key={user.id}
           user={user}
-          index={page === 0 ? index : index + page * rowsPerPage}
+          index={currentPage === 0 ? index : index + currentPage * rowsPerPage}
         />
       ))
   }
@@ -107,9 +116,15 @@ const DataTable = () => {
             className='table-pagination'
             rowsPerPageOptions={[1, 3, 5, 10, 15, 25, 100]}
             component='div'
-            count={data.users.length}
+            count={
+              currentPage === 0
+                ? data.users.length
+                : currentPage >= Math.ceil(data.users.length / rowsPerPage)
+                ? data.users.length + 1
+                : data.users.length
+            }
             rowsPerPage={rowsPerPage}
-            page={page}
+            page={currentPage}
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
