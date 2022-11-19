@@ -12,7 +12,7 @@ import Tooltip from '@mui/material/Tooltip'
 import '../../styles/navbar.scss'
 
 const Navbar = ({ title, img }) => {
-  const { darkMode, darkModeToggle } = useDarkModeContext()
+  const { darkMode, setDarkModeValue } = useDarkModeContext()
 
   return (
     <Box className='navbar-container'>
@@ -24,7 +24,10 @@ const Navbar = ({ title, img }) => {
             </Link>
             <span className='navbar-title'>{title}</span>
           </Typography>
-          <Button color='inherit' onClick={darkModeToggle}>
+          <Button
+            color='inherit'
+            onClick={() => setDarkModeValue((previousState) => !previousState)}
+          >
             <Tooltip title={darkMode ? 'Light Mode' : 'Dark Mode'} arrow>
               {darkMode ? <WbSunnyIcon /> : <DarkModeIcon />}
             </Tooltip>

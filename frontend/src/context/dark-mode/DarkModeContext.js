@@ -1,7 +1,6 @@
 import { createContext, useContext } from 'react'
-import initialState from './DarkModeState'
 
-const DarkModeContext = createContext(initialState)
+const DarkModeContext = createContext()
 
 export const useDarkModeContext = () => {
   return useContext(DarkModeContext)
