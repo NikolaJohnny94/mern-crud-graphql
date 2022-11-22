@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client'
 import { useModalContext } from '../context/modal/ModalContext'
 import { useDarkModeContext } from '../context/dark-mode/DarkModeContext'
 import { ADD_USER, UPDATE_USER } from '../mutations/userMutations'
-import { GET_USERS } from '../queries/UserQueries'
+import { GET_USER, GET_USERS } from '../queries/UserQueries'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -17,8 +17,8 @@ const FormModal = () => {
 
   const {
     open,
-    editForm,
-    editUser,
+    editMode,
+    currentUser,
     addNewUser,
     updateExistingUser,
     closeModal,
@@ -35,10 +35,10 @@ const FormModal = () => {
   })
 
   useEffect(() => {
-    if (editForm) {
-      setData(editUser)
+    if (editMode) {
+      setData(currentUser)
     }
-  }, [editForm, editUser])
+  }, [editMode, currentUser])
 
   const { firstName, lastName, email, occupation, phoneNumber } = data
 
@@ -59,24 +59,16 @@ const FormModal = () => {
 
   const [updateUser] = useMutation(UPDATE_USER, {
     variables: {
-      id: editUser?.id,
+      id: currentUser?.id,
       firstName,
       lastName,
       email,
       occupation,
       phoneNumber,
     },
-    update(cache) {
-      const { users } = cache.readQuery({
-        query: GET_USERS,
-      })
-      cache.writeQuery({
-        query: GET_USERS,
-        data: {
-          users: users,
-        },
-      })
-    },
+    refetchQueries: [
+      { query: GET_USER, variables: { slug: currentUser?.slug } },
+    ],
   })
 
   const onChange = (e) => {
@@ -95,7 +87,7 @@ const FormModal = () => {
   }
 
   const onClose = () => {
-    closeModal(editForm, setErrorInput, setData)
+    closeModal(editMode, setErrorInput, setData)
   }
 
   return (
@@ -122,7 +114,6 @@ const FormModal = () => {
               Create new user
             </Typography>
           </Box>
-
           <TextField
             className='modal-inputs'
             id='outlined-basic'
@@ -184,7 +175,7 @@ const FormModal = () => {
             required
             error={errorInput && phoneNumber === ''}
           />
-          {editForm ? (
+          {editMode ? (
             <Button
               className='modal-update-button'
               variant='contained'
