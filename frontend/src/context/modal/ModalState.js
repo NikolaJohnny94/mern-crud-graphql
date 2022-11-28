@@ -1,7 +1,7 @@
 const initialState = {
   open: false,
-  editForm: false,
-  editUser: {},
+  editMode: false,
+  currentUser: {},
 }
 
 export default initialState

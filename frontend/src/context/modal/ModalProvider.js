@@ -62,6 +62,7 @@ const ModalProvider = ({ children }) => {
         email: user.email,
         occupation: user.occupation,
         phoneNumber: user.phoneNumber,
+        slug: user.slug,
       },
     })
   }
@@ -101,8 +102,8 @@ const ModalProvider = ({ children }) => {
   }
 
   //Close Modal
-  const closeModal = (editForm, setErrorInput, setData) => {
-    if (editForm) {
+  const closeModal = (editMode, setErrorInput, setData) => {
+    if (editMode) {
       dispatch({ type: CLOSE_EDIT_FORM })
     } else {
       dispatch({ type: CLOSE_MODAL })
@@ -122,8 +123,8 @@ const ModalProvider = ({ children }) => {
     <ModalContext.Provider
       value={{
         open: state.open,
-        editForm: state.editForm,
-        editUser: state.editUser,
+        editMode: state.editMode,
+        currentUser: state.currentUser,
         dispatch,
         addNewUser,
         populateEditForm,

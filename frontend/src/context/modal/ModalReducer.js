@@ -19,15 +19,15 @@ const ModalReducer = (state, action) => {
     case OPEN_EDIT_FORM: {
       return {
         open: true,
-        editForm: true,
-        editUser: action.payload,
+        editMode: true,
+        currentUser: action.payload,
       }
     }
     case CLOSE_EDIT_FORM: {
       return {
         open: false,
-        editForm: false,
-        editUser: {},
+        editMode: false,
+        currentUser: {},
       }
     }
     default:
